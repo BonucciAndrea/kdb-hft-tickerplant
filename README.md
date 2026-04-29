@@ -11,7 +11,7 @@ This project implements a classic tiered kdb+ architecture used by top-tier inve
 3.  **Real-Time Database (`rdb.q`)**: Subscribes to the Tickerplant to store the current day's live market data in-memory (RAM) for ultra-fast querying. Includes an End-of-Day (`eod[]`) function to flush memory to disk.
 4.  **Historical Database (`hdb.q`)**: Loads partitioned, on-disk historical data for long-term storage and backtesting.
 5.  **Complex Event Processor (`cep.q`)**: A real-time analytics engine that calculates live mid-prices, bid-ask spreads, and tick volumes on the fly.
-6.  **Unified Gateway (`gw.q`)**: The single API access point[cite: 6]. It utilizes asynchronous IPC to query the HDB and RDB in parallel, stitching historical and live data into a single seamless table.
+6.  **Unified Gateway (`gw.q`)**: The single API access point. It utilizes asynchronous IPC to query the HDB and RDB in parallel, stitching historical and live data into a single seamless table.
 
 ## ✨ Key Features
 
