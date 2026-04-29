@@ -46,6 +46,11 @@ start_dashboard.bat     # Windows Terminal auto-launcher
 2.  Run your deployment script (e.g., `start_dashboard.bat`).
 3.  Observe 7 localized processes spinning up and routing live options data instantly.
 
+
+<img width="1891" height="928" alt="image" src="https://github.com/user-attachments/assets/d7dfb07e-09ac-4301-87fe-eac354d9d66b" />
+
+
+
 ### Querying the System
 Interact with the system through the **Gateway** terminal (Port 5003):
 
