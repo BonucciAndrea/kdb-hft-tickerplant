@@ -1,0 +1,51 @@
+# KDB+ FULL TICKERPLANT PIPELINE VERIFICATION
+# Use this to verify the complete flow: Gen -> TP -> RDB/CEP -> HDB -> GW
+
+# PRE-REQUISITE: 
+# 1. Ensure you are in 'my_options_plant' directory.
+# 2. Ensure all 'q' processes are killed (taskkill /f /im q.exe).
+
+# ---------------------------------------------------------
+# TERMINAL 1: THE TICKERPLANT (ROUTER)
+# ---------------------------------------------------------
+Command: q tp.q -p 5000
+Verify: Prompt drops to q). It is the backbone of the plant.
+
+# ---------------------------------------------------------
+# TERMINAL 2: THE RDB (REAL-TIME STORAGE)
+# ---------------------------------------------------------
+Command: q rdb.q -p 5002
+Verify: Prints "RDB successfully subscribed."
+
+# ---------------------------------------------------------
+# TERMINAL 3: THE CEP (REAL-TIME ANALYTICS)
+# ---------------------------------------------------------
+Command: q cep.q -p 5004
+Verify: Prints "CEP Engine Online! Dashboard initialized."
+
+# ---------------------------------------------------------
+# TERMINAL 4: THE HDB (HISTORICAL STORAGE)
+# ---------------------------------------------------------
+Command: q hdb.q -p 5001
+Verify: Prints "HDB successfully loaded historical data."
+
+# ---------------------------------------------------------
+# TERMINAL 5: THE GENERATOR (DATA FEED)
+# ---------------------------------------------------------
+Command: q generator.q
+Verify: Should start printing dots (.) every second.
+
+# ---------------------------------------------------------
+# COMPONENT CHECKLIST
+# ---------------------------------------------------------
+1. IN RDB (T2): Run 'count quotes'. It should increase every second.
+2. IN CEP (T3): Run 'liveDashboard'. You should see midPrice/spread updating.
+3. FLUSH DATA: In RDB (T2), run 'eod[]'. 
+4. IN HDB (T4): Run '\l .' then 'count quotes'. Rows should appear on disk.
+
+# ---------------------------------------------------------
+# TERMINAL 6: THE GATEWAY (UNIFIED ACCESS)
+# ---------------------------------------------------------
+Command: q gw.q -p 5003
+Verify: Run 'getQuotes[`AAPL260515C00150000]'. 
+Output should show combined data from HDB (disk) and RDB (RAM) with today's date.
