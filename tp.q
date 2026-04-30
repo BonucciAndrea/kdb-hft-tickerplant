@@ -1,7 +1,7 @@
 // tp.q
 \l config/schema.q
 
-/ Subscribe Function
+// Subscribe Function
 subs:()!()
 
 sub:{[tableName]
@@ -10,10 +10,9 @@ sub:{[tableName]
     (tableName; 0#value tableName)
  }
 
-/ Transaction Log
+// Transaction Log
 logFile:hsym`$"tp_logs/log_",string .z.D;
 
-// --- NUCLEAR CLEAN SLATE ---
 // Force delete the old log file to guarantee no corrupted data survives
 if[not ()~key logFile; 
     -1 "Deleting corrupted log file...";
@@ -23,7 +22,7 @@ if[not ()~key logFile;
 logFile set ();
 logHandle: hopen logFile;
 
-/ Update Function
+// Update Function
 upd:{[tableName;tableData]
     logHandle enlist (`upd;tableName;tableData);
     
@@ -31,7 +30,7 @@ upd:{[tableName;tableData]
     if[count handles;{neg[x](`upd;y;z)}[;tableName;tableData]each handles;];
  }
 
-/ Disconnection Handler
+// Disconnection Handler
 .z.pc:{[handle] 
     subs::subs except\: handle;
     -1"Subscriber ",(string handle)," disconnected.";
