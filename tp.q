@@ -25,7 +25,6 @@ logHandle: hopen logFile;
 // Update Function
 upd:{[tableName;tableData]
     logHandle enlist (`upd;tableName;tableData);
-    
     handles:subs[tableName];
     if[count handles;{neg[x](`upd;y;z)}[;tableName;tableData]each handles;];
  }
