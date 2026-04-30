@@ -6,7 +6,7 @@ upd:{[tName;tData]
     tName insert tData;
  };
 
-// 2. Define End-of-Day Function
+// 2. END-OF-DAY FUNCTION
 eod: {[]
     -1 "Starting EOD flush to disk...";
     .Q.dpft[`:hdb_data; .z.D; `sym; `quotes];
@@ -25,7 +25,7 @@ if[not () ~ key logFile;
     -1 "Recovery complete. Total rows now: ", string count quotes;
  ];
 
-// 4. Connect to Tickerplant and Subscribe
+// 4. SUBSCRIBE TO TICKERPLANT
 tpHandle: hopen 5000;
 tpHandle "sub[`quotes]";
 tpHandle "sub[`trades]";
