@@ -4,7 +4,7 @@
 // 1. Initialize the Dashboard FIRST
 liveDashboard:([sym:`symbol$()] midPrice:`float$(); spread:`float$(); ticks:`long$());
 
-// 2. DEFINE THE UPDATE FUNCTION SECOND
+// 2. Define the update function
 upd:{[tName;tData]
     if[tName=`quotes;
         LASTCEPDATA::tData;
@@ -19,7 +19,7 @@ upd:{[tName;tData]
     ];
  };
 
-// 3. RECOVER STATE
+// 3. Recovery
 logFile:hsym`$"tp_logs/log_",string .z.D;
 -1 "Checking for log file: ", string logFile;
 
