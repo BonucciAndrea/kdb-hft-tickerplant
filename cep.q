@@ -2,7 +2,7 @@
 \l config/schema.q
 
 // 1. Initialize the Dashboard FIRST
-liveDashboard:([sym:`symbol$()] midPrice:`float$(); spread:`float$(); ticks:`long$());
+liveDashboard:([sym:`symbol$()] midPrice:`float$(); wmid:`float$(); imbalance:`float$(); spread:`float$(); ticks:`long$());
 
 // 2. Define the update function
 upd:{[tName;tData]
@@ -10,8 +10,10 @@ upd:{[tName;tData]
         LASTCEPDATA::tData;
         
         metrics: select 
-            midPrice: last (bid+ask)%2.0, 
-            spread: last ask-bid, 
+            midPrice: last (bid+ask)%2.0,
+            wmid: last ((bid*asize)+(ask*bsize))%(bsize+asize),
+            spread: last ask-bid,
+            imbalance: last (bsize-asize)%(bsize+asize),
             ticks: count i 
             by sym from tData;
             
