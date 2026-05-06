@@ -25,11 +25,11 @@ publishTick: {[]
 
     neg[tpHandle] (`upd; `quotes; newData);
     
-    // This will print a dot to the screen every 250ms so you know it's alive!
+    // This will print a dot to the screen every 1ms so you know it's alive!
     1 "."; 
  };
 
 .z.ts: publishTick;
-\t 250 
+\t 1 
 
--1 "\nGenerator started. Pushing 20 quotes every 250ms (80/sec)...";
+-1 "\nGenerator started. Pushing 20 quotes every 1ms (20000/sec)...";
