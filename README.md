@@ -26,7 +26,7 @@ This project implements a classic tiered kdb+ architecture used by top-tier inve
   schema.q              # Centralized table definitions (quotes, trades)
 /tp_logs                # Directory for daily binary transaction logs
 /hdb_data               # Directory for on-disk historical data partitions
-generator.q             # Market data simulator (80 ticks/sec)
+generator.q             # Market data simulator (20000 ticks/sec)
 tp.q                    # Tickerplant router (Port 5000)
 hdb.q                   # Historical DB (Port 5001)
 rdb.q                   # Real-Time DB (Port 5002)
