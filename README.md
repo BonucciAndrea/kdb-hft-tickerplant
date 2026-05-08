@@ -6,7 +6,7 @@ A robust, fault-tolerant options tickerplant built from scratch using **kdb+/q**
 
 This project implements a classic tiered kdb+ architecture used by top-tier investment banks and hedge funds:
 
-1.  **Data Generator (`generator.q`)**: Simulates a live market feed, publishing 20 unique options quotes every 250ms (80 quotes per second) across Apple, Microsoft, Nvidia, Tesla, and Amazon.
+1.  **Data Generator (`generator.q`)**: Simulates a live market feed, publishing 20 unique options quotes every 1ms (20000 quotes per second) across Apple, Microsoft, Nvidia, Tesla, and Amazon.
 2.  **Tickerplant (`tp.q`)**: The central router. It writes all incoming ticks to a binary transaction log on disk for disaster recovery, then broadcasts the data to all subscribed downstream processes.
 3.  **Real-Time Database (`rdb.q`)**: Subscribes to the Tickerplant to store the current day's live market data in-memory (RAM) for ultra-fast querying. Includes an End-of-Day (`eod[]`) function to flush memory to disk.
 4.  **Historical Database (`hdb.q`)**: Loads partitioned, on-disk historical data for long-term storage and backtesting.
